@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add connection Database
+var connectionString = builder.Configuration.GetConnectionString("T2204M");
+builder.Services.AddDbContext<DMAWS_T2204M_VuXuanDong.Models.ApiContext>(
+        options => options.UseSqlServer(connectionString)
+    );
 
 var app = builder.Build();
 
